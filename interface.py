@@ -76,7 +76,7 @@ class App():
         self.date_list = [1,2,3]
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=1, row=3)
-
+        self.title = Label(master, text="Discount Moie Tickets", font=self.title_font, bg="black", fg="white")
 
 
 if __name__ == "__main__":
