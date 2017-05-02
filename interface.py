@@ -63,8 +63,8 @@ This ticket will have date, show, time, and number of tickets.
 All team members will make appropriate pull requests and merges to github.
 '''
 
-from tkinter import *
-from tkinter import font
+from tkinter_app import *
+from tkinter_app import font
 class App():
     def __init__(self):
         self.title_font = font.Font(family="Times", size=20, weight=font.BOLD)

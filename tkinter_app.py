@@ -62,7 +62,7 @@ This ticket will have date, show, time, and number of tickets.
 
 All team members will make appropriate pull requests and merges to github.
 '''
-from tkinter import *
+from tkinter_app import *
 import random
 
 class App():
