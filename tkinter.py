@@ -63,11 +63,18 @@ This ticket will have date, show, time, and number of tickets.
 All team members will make appropriate pull requests and merges to github.
 '''
 from tkinter import *
-from tkinter import font
 import random
 
 class App():
     def __init__(self):
         self.title_font = font.Font(family="Times", size=20, weight=font.BOLD)
+        self.title = Label(master, text="Discount Moie Tickets", font=self.title_font, bg="black", fg="white")
 
 
+
+if __name__ == "__main__":
+    #root = Tk()
+    #root.title("Discount Movie Tickets")
+    #my_app = App(root)
+    #root.mainloop()
+    pass
