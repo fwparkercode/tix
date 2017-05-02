@@ -65,11 +65,12 @@ All team members will make appropriate pull requests and merges to github.
 
 from tkinter import *
 from tkinter import font
+
 class App():
-    def __init__(self):
+    def __init__(self, master):
         self.title_font = font.Font(family="Times", size=20, weight=font.BOLD)
         self.title = Label(master, text="Discount Moie Tickets",font=self.title_font, bg="black", fg="white")
-
+        self.title.grid(row=1, column=1, columnspan=2, sticky="e" + "w")
 
 
 if __name__ == "__main__":
