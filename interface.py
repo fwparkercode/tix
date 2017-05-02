@@ -66,11 +66,17 @@ All team members will make appropriate pull requests and merges to github.
 from tkinter import *
 from tkinter import font
 
+
 class App():
     def __init__(self, master):
         self.title_font = font.Font(family="Times", size=20, weight=font.BOLD)
         self.title = Label(master, text="Discount Moie Tickets",font=self.title_font, bg="black", fg="white")
         self.title.grid(row=1, column=1, columnspan=2, sticky="e" + "w")
+        self.date = StringVar()
+        self.date_list = [1,2,3]
+        self.date_menu = OptionMenu(master, self.date, *self.date_list)
+        self.date_menu.grid(column=1, row=3)
+
 
 
 if __name__ == "__main__":
