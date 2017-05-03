@@ -78,6 +78,7 @@ class App():
         self.date.set(marc_1.get_date()[0][0])
         self.url_list = marc_1.get_date()[1]
         #marc_1.get_movies(url_list[self.date_list.find(self.date.get()])
+        '''^^ needs to update everytime a different date is selected'''
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=2, row=2)
         self.date_label = Label(master, text="Select a date:")
