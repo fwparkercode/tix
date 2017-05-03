@@ -75,7 +75,7 @@ class App():
 
         self.date = StringVar()
         self.date.set("                     ")
-        self.date_list = marc_1.get_date()[0]
+        self.date_list = marc_1.get_date()
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=2, row=2)
         self.date_label = Label(master, text="Select a date:")
