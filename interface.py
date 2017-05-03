@@ -74,8 +74,8 @@ class App():
         self.title.grid(row=1, column=1, columnspan=2, sticky="e" + "w")
 
         self.date = StringVar()
-        self.date.set("                     ")
         self.date_list = marc_1.get_date()
+        self.date.set(marc_1.get_date()[0])
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=2, row=2)
         self.date_label = Label(master, text="Select a date:")
@@ -85,15 +85,15 @@ class App():
         self.movie.set("                    ")
         self.movie_list = ["testingmovie", "testingmovie2"] #RUN MARC'S FUNC'''
         self.movie_menu = OptionMenu(master, self.movie, *self.movie_list)
-        self.movie_menu.grid(row=3, column=2)
+        self.movie_menu.grid(row=3, column=2, sticky="w")
         self.movie_label = Label(master, text="Select a movie:")
         self.movie_label.grid(row=3, column=1)
 
         self.time = StringVar()
-        self.time.set("                     ")
+        self.time.set("        ")
         self.time_list = ["9:30", "8:30", "10:10", "11:45"] #RUN MARCS FUNC
         self.time_menu = OptionMenu(master, self.time, *self.time_list)
-        self.time_menu.grid(row=4, column=2, sticky="ew")
+        self.time_menu.grid(row=4, column=2, sticky="w")
         self.time_label = Label(master, text="Select a time:")
         self.time_label.grid(row=4, column=1)
 
@@ -101,7 +101,7 @@ class App():
         self.ticket_quant.set(0)
         self.ticket_quant_list = [0,1,2,3,4,5,6]  #RUN ELIZA'S FUNCTION HERE
         self.ticket_quant_menu = OptionMenu(master, self.ticket_quant, *self.ticket_quant_list)
-        self.ticket_quant_menu.grid(row=5, column=2)
+        self.ticket_quant_menu.grid(row=5, column=2, sticky="w")
         self.ticket_label = Label(master, text="Quantity:")
         self.ticket_label.grid(row=5, column=1)
 
