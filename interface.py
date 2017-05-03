@@ -118,7 +118,7 @@ class App():
             self.date.set("")
             self.movie.set("")
             self.time.set("")
-            self.ticket_quant.set("")
+            self.ticket_quant.set(0)
 
 
 
