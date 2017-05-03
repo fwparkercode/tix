@@ -75,7 +75,7 @@ class App():
 
         self.date = StringVar()
         self.date.set("     ")
-        self.date_list = [1,2,3] #RUN MARC'S FUNC'''
+        self.date_list = ["1", "2", "3"] #RUN MARC'S FUNC'''
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=2, row=2)
         self.date_label = Label(master, text="Select a date:")
@@ -97,17 +97,31 @@ class App():
         self.time_label = Label(master, text="Select a time:")
         self.time_label.grid(row=4, column=1)
 
-        #max_width = len(max(list, key=len))
-        #menu.config(width=max_width)
-
         self.ticket_quant = IntVar()
         self.ticket_quant.set(0)
-        self.ticket_quant_list = [0,1,2,3,4,5,6]  #RUN ELIZAS FUNCTION HERE
+        self.ticket_quant_list = [0,1,2,3,4,5,6]  #RUN ELIZA'S FUNCTION HERE
         self.ticket_quant_menu = OptionMenu(master, self.ticket_quant, *self.ticket_quant_list)
         self.ticket_quant_menu.grid(row=5, column=2)
         self.ticket_label = Label(master, text="Quantity:")
-
         self.ticket_label.grid(row=5, column=1)
+
+        label_text = StringVar()
+        self.response_label = Label(master, textvariable=label_text)
+
+        self.purchase_button = Button(master, text="Purchase", command=lambda:purchase(self, self.response_label, self.date.get(), self.movie.get(), self.time.get(), str(self.ticket_quant.get())))
+        self.purchase_button.grid(row=6, column=1, columnspan=2)
+
+        def purchase(self, label, date, movie, time, quantity):
+            '''RUN ELIZA'S FUNCTION'''
+            label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+            label.grid(row=7, column=1, columnspan=2)
+            self.date.set("")
+            self.movie.set("")
+            self.time.set("")
+            self.ticket_quant.set("")
+
+
+
 
 if __name__ == "__main__":
     root = Tk()
