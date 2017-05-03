@@ -62,7 +62,7 @@ This ticket will have date, show, time, and number of tickets.
 
 All team members will make appropriate pull requests and merges to github.
 '''
-
+import marc_1
 from tkinter import *
 from tkinter import font
 
@@ -74,15 +74,15 @@ class App():
         self.title.grid(row=1, column=1, columnspan=2, sticky="e" + "w")
 
         self.date = StringVar()
-        self.date.set("     ")
-        self.date_list = ["1", "2", "3"] #RUN MARC'S FUNC'''
+        self.date.set("                     ")
+        self.date_list = marc_1.get_date()[0]
         self.date_menu = OptionMenu(master, self.date, *self.date_list)
         self.date_menu.grid(column=2, row=2)
         self.date_label = Label(master, text="Select a date:")
         self.date_label.grid(row=2, column=1)
 
         self.movie = StringVar()
-        self.movie.set("     ")
+        self.movie.set("                    ")
         self.movie_list = ["testingmovie", "testingmovie2"] #RUN MARC'S FUNC'''
         self.movie_menu = OptionMenu(master, self.movie, *self.movie_list)
         self.movie_menu.grid(row=3, column=2)
@@ -90,7 +90,7 @@ class App():
         self.movie_label.grid(row=3, column=1)
 
         self.time = StringVar()
-        self.time.set("     ")
+        self.time.set("                     ")
         self.time_list = ["9:30", "8:30", "10:10", "11:45"] #RUN MARCS FUNC
         self.time_menu = OptionMenu(master, self.time, *self.time_list)
         self.time_menu.grid(row=4, column=2, sticky="ew")
