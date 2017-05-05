@@ -63,7 +63,6 @@ This ticket will have date, show, time, and number of tickets.
 All team members will make appropriate pull requests and merges to github.
 '''
 import marc_1
-import efischer1
 from tkinter import *
 from tkinter import font
 
