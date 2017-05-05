@@ -63,8 +63,10 @@ This ticket will have date, show, time, and number of tickets.
 All team members will make appropriate pull requests and merges to github.
 '''
 import marc_1
+import efischer1
 from tkinter import *
 from tkinter import font
+
 
 def resize_menu(input_list, menu):
     max_length = len(max(input_list, key=len))
@@ -128,7 +130,6 @@ class App():
         self.time_menu.grid(row=4, column=2, sticky="w")
         self.time_label = Label(master, text="Select a time:")
         self.time_label.grid(row=4, column=1)
-
 
         self.ticket_quant = IntVar()
         self.ticket_quant.set(0)
