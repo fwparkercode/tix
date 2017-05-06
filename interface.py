@@ -73,18 +73,22 @@ def resize_menu(input_list, menu):
 
 
 def change_movies(input_list, master, movie, menu, date_list, date, url_list, time_list, time_menu, time):
-    input_list = ["1","4","0"] #marc_1.get_movies(url_list[date_list.find(date.get()])
+    list_of_lists = [["3", "5", "9", "2"], ["1", "9", "3", "12", "14"]]
+    if input_list == list_of_lists[0]:
+        input_list = list_of_lists[1]
+    else:
+        input_list = list_of_lists[0] #marc_1.get_movies(url_list[date_list.find(date.get()])
     app.movie_list = input_list  # look at this
     menu.grid_remove()
-    print("tt")
     movie.set("-Select-")
     menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie))
     menu.grid(row=3, column=2, sticky="w")
     #resize_menu(input_list, menu)
+    change_time(time_list, master, time_menu, time, movie)
 
 
 def change_time(time_list, master, time_menu, time, movie):
-    print(movie)
+    print(movie.get())
     if movie != "-Select-":
         time_list = ["9:00", "8:09"]  # PUT MARC'S FUNC HERE
         app.time_list = time_list
@@ -93,6 +97,13 @@ def change_time(time_list, master, time_menu, time, movie):
         time_menu = OptionMenu(master, time, *time_list)
         time_menu.grid(row=4, column=2, sticky='w')
         #resize_menu(time_list, time_menu)
+    else:
+        time_list = ["-Select-"]  # PUT MARC'S FUNC HERE
+        app.time_list = time_list
+        time_menu.grid_remove()
+        time.set("-Select-")
+        time_menu = OptionMenu(master, time, *time_list)
+        time_menu.grid(row=4, column=2, sticky='w')
 
 class App():
     def __init__(self, master):
