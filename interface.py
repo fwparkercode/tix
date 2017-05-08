@@ -89,7 +89,7 @@ def change_movies(input_list, master, movie, menu, date_list, date, url_list, ti
 
 def change_time(time_list, master, time_menu, time, movie):
     print(movie.get())
-    if movie != "-Select-":
+    if movie.get() != "-Select-":
         time_list = ["9:00", "8:09"]  # PUT MARC'S FUNC HERE
         app.time_list = time_list
         time_menu.grid_remove()
