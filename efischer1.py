@@ -20,7 +20,6 @@
 # start with a single movie on two days
 # if name = main, call functions and see if the tests work
 
-ledger = []
 
 def purchase():
     # if you can purchase, execute that and add to ledger
@@ -40,3 +39,6 @@ def pull_data():
     # scan those lists using other functions
     pass
 
+if __name__=="__main__":
+    ledger = []
+    pass
