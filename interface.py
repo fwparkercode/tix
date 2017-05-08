@@ -67,6 +67,44 @@ from tkinter import *
 from tkinter import font
 
 
+def resize_menu(input_list, menu):
+    max_length = len(max(input_list, key=len))
+    menu.config(width=int(max_length * .8 + 4))
+
+
+def change_movies(input_list, master, movie, menu, date_list, date, url_list, time_list, time_menu, time):
+    list_of_lists = [["3", "5", "9", "2"], ["1", "9", "3", "12", "14"]]
+    if input_list == list_of_lists[0]:
+        input_list = list_of_lists[1]
+    else:
+        input_list = list_of_lists[0] #marc_1.get_movies(url_list[date_list.find(date.get()])
+    app.movie_list = input_list  # look at this
+    menu.grid_remove()
+    movie.set("-Select-")
+    menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie))
+    menu.grid(row=3, column=2, sticky="w")
+    #resize_menu(input_list, menu)
+    change_time(time_list, master, time_menu, time, movie)
+
+
+def change_time(time_list, master, time_menu, time, movie):
+    print(movie.get())
+    if movie.get() != "-Select-":
+        time_list = ["9:00", "8:09"]  # PUT MARC'S FUNC HERE
+        app.time_list = time_list
+        time_menu.grid_remove()
+        time.set("-Select-")
+        time_menu = OptionMenu(master, time, *time_list)
+        time_menu.grid(row=4, column=2, sticky='w')
+        #resize_menu(time_list, time_menu)
+    else:
+        time_list = ["-Select-"]  # PUT MARC'S FUNC HERE
+        app.time_list = time_list
+        time_menu.grid_remove()
+        time.set("-Select-")
+        time_menu = OptionMenu(master, time, *time_list)
+        time_menu.grid(row=4, column=2, sticky='w')
+
 class App():
     def __init__(self, master):
         self.title_font = font.Font(family="Times", size=20, weight=font.BOLD)
@@ -74,24 +112,30 @@ class App():
         self.title.grid(row=1, column=1, columnspan=2, sticky="e" + "w")
 
         self.date = StringVar()
-        self.date_list = marc_1.get_date()
-        self.date.set(marc_1.get_date()[0])
-        self.date_menu = OptionMenu(master, self.date, *self.date_list)
+
+        self.date_list = marc_1.get_date()[0]
+        self.date.set(marc_1.get_date()[0][0])
+        self.date.set("-Select-")
+        self.url_list = marc_1.get_date()[1]
+        '''Line below has a lambda input b/c it was broken without one'''
+        self.date_menu = OptionMenu(master, self.date, *self.date_list, command=lambda x: change_movies(self.movie_list, master, self.movie, self.movie_menu, self.date_list, self.date, self.url_list, self.time_list, self.time_menu, self.time))
         self.date_menu.grid(column=2, row=2)
+        resize_menu(self.date_list, self.date_menu)
         self.date_label = Label(master, text="Select a date:")
         self.date_label.grid(row=2, column=1)
 
         self.movie = StringVar()
-        self.movie.set("                    ")
-        self.movie_list = ["testingmovie", "testingmovie2"] #RUN MARC'S FUNC'''
-        self.movie_menu = OptionMenu(master, self.movie, *self.movie_list)
+        self.movie.set("-Select-")
+        self.movie_list = ["-Select-"]
+
+        self.movie_menu = OptionMenu(master, self.movie, *self.movie_list, command=lambda x: change_time(self.time_list, master, self.time_menu, self.time, self.movie.get()))
         self.movie_menu.grid(row=3, column=2, sticky="w")
         self.movie_label = Label(master, text="Select a movie:")
         self.movie_label.grid(row=3, column=1)
 
         self.time = StringVar()
-        self.time.set("        ")
-        self.time_list = ["9:30", "8:30", "10:10", "11:45"] #RUN MARCS FUNC
+        self.time.set("-Select-")
+        self.time_list = ["-Select-"]
         self.time_menu = OptionMenu(master, self.time, *self.time_list)
         self.time_menu.grid(row=4, column=2, sticky="w")
         self.time_label = Label(master, text="Select a time:")
@@ -99,7 +143,7 @@ class App():
 
         self.ticket_quant = IntVar()
         self.ticket_quant.set(0)
-        self.ticket_quant_list = [0,1,2,3,4,5,6]  #RUN ELIZA'S FUNCTION HERE
+        self.ticket_quant_list = [0,1,2,3,4,5,6]  # RUN ELIZA'S FUNCTION HERE
         self.ticket_quant_menu = OptionMenu(master, self.ticket_quant, *self.ticket_quant_list)
         self.ticket_quant_menu.grid(row=5, column=2, sticky="w")
         self.ticket_label = Label(master, text="Quantity:")
@@ -115,16 +159,14 @@ class App():
             '''RUN ELIZA'S FUNCTION'''
             label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
             label.grid(row=7, column=1, columnspan=2)
-            self.date.set("")
-            self.movie.set("")
-            self.time.set("")
+            print(self.movie_list)
+            self.date.set(self.date_list[0])
+            self.movie.set("-Select-")
+            self.time.set("-Select-")
             self.ticket_quant.set(0)
-
-
-
 
 if __name__ == "__main__":
     root = Tk()
     root.title("Discount Movie Tickets")
-    my_app = App(root)
+    app = App(root)
     root.mainloop()
