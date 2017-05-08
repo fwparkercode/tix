@@ -31,17 +31,22 @@ def get_date():
 
 
 
-
-
-
-
 # Movies
+def pull_movies(url):
 
+    page = urllib.request.urlopen(url)
+    soup = BeautifulSoup(page.read(), "html.parser")
+
+    my_movies = [x.text.strip() for x in soup.findAll("a", {"class": "showtimes-movie-title"})]
+
+    return my_movies
 
 
 
 if __name__ == "__main__":
     get_date()
+    print(pull_movies("http://www.fandango.com/regalwebsterplace11_aaaxr/theaterpage?date=5/8/2017"))
+
 
 
 
