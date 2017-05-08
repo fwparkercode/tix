@@ -73,11 +73,7 @@ def resize_menu(input_list, menu):
 
 
 def change_movies(input_list, master, movie, menu, date_list, date, url_list, time_list, time_menu, time):
-    list_of_lists = [["3", "5", "9", "2"], ["1", "9", "3", "12", "14"]]
-    if input_list == list_of_lists[0]:
-        input_list = list_of_lists[1]
-    else:
-        input_list = list_of_lists[0] #marc_1.get_movies(url_list[date_list.find(date.get()])
+    input_list = marc_1.pull_movies(url_list[date_list.index(date.get())])
     app.movie_list = input_list  # look at this
     menu.grid_remove()
     movie.set("-Select-")
