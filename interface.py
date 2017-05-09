@@ -155,7 +155,6 @@ class App():
             '''RUN ELIZA'S FUNCTION'''
             label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
             label.grid(row=7, column=1, columnspan=2)
-            print(self.movie_list)
             self.date.set(self.date_list[0])
             self.movie.set("-Select-")
             self.time.set("-Select-")
