@@ -80,7 +80,7 @@ def change_movies(input_list, master, movie, menu, date_list, date, url_list, ti
     movie.set("-Select-")
     menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list))
     menu.grid(row=3, column=2, sticky="w")
-    #resize_menu(input_list, menu)
+    resize_menu(input_list, menu)
     change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list)
 
 
@@ -115,7 +115,7 @@ class App():
         self.url_list = marc_1.get_date()[1]
         '''Line below has a lambda input b/c it was broken without one'''
         self.date_menu = OptionMenu(master, self.date, *self.date_list, command=lambda x: change_movies(self.movie_list, master, self.movie, self.movie_menu, self.date_list, self.date, self.url_list, self.time_list, self.time_menu, self.time, self.movie_list))
-        self.date_menu.grid(column=2, row=2)
+        self.date_menu.grid(column=2, row=2, sticky='w')
         resize_menu(self.date_list, self.date_menu)
         self.date_label = Label(master, text="Select a date:")
         self.date_label.grid(row=2, column=1)
