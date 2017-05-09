@@ -151,11 +151,11 @@ class App():
         self.purchase_button = Button(master, text="Purchase", command=lambda:purchase(self, self.response_label, self.date.get(), self.movie.get(), self.time.get(), str(self.ticket_quant.get())))
         self.purchase_button.grid(row=6, column=1, columnspan=2)
 
-        def purchase(self, label, date, movie, time, quantity):
+        def purchase(self, label, date, movie, time, quantity, movie_list, time_list):
             '''RUN ELIZA'S FUNCTION'''
             label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
             label.grid(row=7, column=1, columnspan=2)
-            self.date.set(self.date_list[0])
+            self.date.set("-Select-")
             self.movie.set("-Select-")
             self.time.set("-Select-")
             self.ticket_quant.set(0)
