@@ -72,21 +72,21 @@ def resize_menu(input_list, menu):
     menu.config(width=int(max_length * .8 + 4))
 
 
-def change_movies(input_list, master, movie, menu, date_list, date, url_list, time_list, time_menu, time):
+def change_movies(input_list, master, movie, menu, date_list, date, url_list, time_list, time_menu, time, movie_list):
     input_list = marc_1.pull_movies(url_list[date_list.index(date.get())])
-    app.movie_list = input_list  # look at this
+    app.movie_list = input_list # look at this
+    movie_list = input_list
     menu.grid_remove()
     movie.set("-Select-")
-    menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie))
+    menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list))
     menu.grid(row=3, column=2, sticky="w")
     #resize_menu(input_list, menu)
-    change_time(time_list, master, time_menu, time, movie)
+    change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list)
 
 
-def change_time(time_list, master, time_menu, time, movie):
-    print(movie.get())
+def change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list):
     if movie.get() != "-Select-":
-        time_list = ["9:00", "8:09"]  # PUT MARC'S FUNC HERE
+        time_list = marc_1.pull_times(url_list[date_list.index(date.get())], movie_list.index(movie.get()))
         app.time_list = time_list
         time_menu.grid_remove()
         time.set("-Select-")
@@ -114,7 +114,7 @@ class App():
         self.date.set("-Select-")
         self.url_list = marc_1.get_date()[1]
         '''Line below has a lambda input b/c it was broken without one'''
-        self.date_menu = OptionMenu(master, self.date, *self.date_list, command=lambda x: change_movies(self.movie_list, master, self.movie, self.movie_menu, self.date_list, self.date, self.url_list, self.time_list, self.time_menu, self.time))
+        self.date_menu = OptionMenu(master, self.date, *self.date_list, command=lambda x: change_movies(self.movie_list, master, self.movie, self.movie_menu, self.date_list, self.date, self.url_list, self.time_list, self.time_menu, self.time, self.movie_list))
         self.date_menu.grid(column=2, row=2)
         resize_menu(self.date_list, self.date_menu)
         self.date_label = Label(master, text="Select a date:")
@@ -124,7 +124,7 @@ class App():
         self.movie.set("-Select-")
         self.movie_list = ["-Select-"]
 
-        self.movie_menu = OptionMenu(master, self.movie, *self.movie_list, command=lambda x: change_time(self.time_list, master, self.time_menu, self.time, self.movie.get()))
+        self.movie_menu = OptionMenu(master, self.movie, *self.movie_list, command=lambda x: change_time(self.time_list, master, self.time_menu, self.time, self.movie.get(), self.url_list, self.date_list, self.date, self.movie_list))
         self.movie_menu.grid(row=3, column=2, sticky="w")
         self.movie_label = Label(master, text="Select a movie:")
         self.movie_label.grid(row=3, column=1)
