@@ -154,7 +154,7 @@ class App():
 
         def purchase(self, label, date, movie, time, quantity):
             '''RUN ELIZA'S FUNCTION'''
-            response = efischer1.purchase(date, movie, time, int(quantity))
+            response = efischer1.purchase(date[date.find(",") + 2:], movie, time[:-2], int(quantity))
             if response == "Confirmed!":
                 label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
             else:
@@ -165,8 +165,6 @@ class App():
             self.time.set("-Select-")
             self.ticket_quant.set(0)
 
-#[:len(time)-1]
-#[date.find(",") + 1:]
 if __name__ == "__main__":
     root = Tk()
     root.title("Discount Movie Tickets")
