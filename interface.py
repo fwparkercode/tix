@@ -65,6 +65,7 @@ All team members will make appropriate pull requests and merges to github.
 import marc_1
 from tkinter import *
 from tkinter import font
+import efischer1
 
 
 def resize_menu(input_list, menu):
@@ -153,13 +154,19 @@ class App():
 
         def purchase(self, label, date, movie, time, quantity):
             '''RUN ELIZA'S FUNCTION'''
-            label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+            response = efischer1.purchase(date, movie, time, int(quantity))
+            if response == "Confirmed!":
+                label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+            else:
+                label_text.set(response)
             label.grid(row=7, column=1, columnspan=2)
             self.date.set(self.date_list[0])
             self.movie.set("-Select-")
             self.time.set("-Select-")
             self.ticket_quant.set(0)
 
+#[:len(time)-1]
+#[date.find(",") + 1:]
 if __name__ == "__main__":
     root = Tk()
     root.title("Discount Movie Tickets")
