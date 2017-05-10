@@ -65,6 +65,7 @@ All team members will make appropriate pull requests and merges to github.
 import marc_1
 from tkinter import *
 from tkinter import font
+import efischer1
 
 
 def resize_menu(input_list, menu):
@@ -81,6 +82,7 @@ def change_movies(input_list, master, movie, menu, date_list, date, url_list, ti
     menu = OptionMenu(master, movie, *input_list, command=lambda x: change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list))
     menu.grid(row=3, column=2, sticky="w")
     #resize_menu(input_list, menu)
+    menu.config(width=int(20))
     change_time(time_list, master, time_menu, time, movie, url_list, date_list, date, movie_list)
 
 
@@ -93,6 +95,7 @@ def change_time(time_list, master, time_menu, time, movie, url_list, date_list, 
         time_menu = OptionMenu(master, time, *time_list)
         time_menu.grid(row=4, column=2, sticky='w')
         #resize_menu(time_list, time_menu)
+
     else:
         time_list = ["-Select-"]  # PUT MARC'S FUNC HERE
         app.time_list = time_list
@@ -115,7 +118,7 @@ class App():
         self.url_list = marc_1.get_date()[1]
         '''Line below has a lambda input b/c it was broken without one'''
         self.date_menu = OptionMenu(master, self.date, *self.date_list, command=lambda x: change_movies(self.movie_list, master, self.movie, self.movie_menu, self.date_list, self.date, self.url_list, self.time_list, self.time_menu, self.time, self.movie_list))
-        self.date_menu.grid(column=2, row=2)
+        self.date_menu.grid(column=2, row=2, sticky='w')
         resize_menu(self.date_list, self.date_menu)
         self.date_label = Label(master, text="Select a date:")
         self.date_label.grid(row=2, column=1)
@@ -126,6 +129,7 @@ class App():
 
         self.movie_menu = OptionMenu(master, self.movie, *self.movie_list, command=lambda x: change_time(self.time_list, master, self.time_menu, self.time, self.movie.get(), self.url_list, self.date_list, self.date, self.movie_list))
         self.movie_menu.grid(row=3, column=2, sticky="w")
+        self.movie_menu.config(width=int(20))
         self.movie_label = Label(master, text="Select a movie:")
         self.movie_label.grid(row=3, column=1)
 
@@ -153,7 +157,11 @@ class App():
 
         def purchase(self, label, date, movie, time, quantity):
             '''RUN ELIZA'S FUNCTION'''
-            label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+            response = efischer1.purchase(date[date.find(",") + 2:], movie, time[:-2], int(quantity))
+            if response == "Confirmed!":
+                label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+            else:
+                label_text.set(response)
             label.grid(row=7, column=1, columnspan=2)
             self.date.set("-Select-")
             self.movie.set("-Select-")
