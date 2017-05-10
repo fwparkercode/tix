@@ -157,7 +157,7 @@ class App():
 
         def purchase(self, label, date, movie, time, quantity):
             '''RUN ELIZA'S FUNCTION'''
-            response = efischer1.purchase(date[date.find(",") + 2:], movie, time[:-2], int(quantity))
+            response = efischer1.purchase(date[date.find(",") + 2:], movie, time, int(quantity))
             if response == "Confirmed!":
                 label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
             else:
