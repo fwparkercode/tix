@@ -16,19 +16,23 @@
 # ledger is a recording of all actions (every time a purchase is made add it to the ledger)
 # Have 2 files, working doc and one thats permanent
 # Be careful about reading and writing
-
-# start with a single movie on two days
-# if name = main, call functions and see if the tests work
-import csv
 # commit, update, merge, push
 
+import csv
+import os.path
+
+# Checking the file and opeining it
 def filecheck():
     try:
         file = open("ledger.csv" , "r")
     except IOError:
         print("This file does not exist")
+        file = open("ledger.csv" , "w")
+        file.close()
+        file = open("ledger.csv" , "r")
     return file
 
+# Creating a list out of the contents of the file
 def create_list():
     file = filecheck()
     movie_data = []
@@ -37,9 +41,7 @@ def create_list():
         movie_data.append(line)
     return movie_data
 
-# make a function that looks past the comma in the phrase Today, May 8
-#make one ledger that you read from and append new data to the end of the list
-
+# Main function
 def purchase(date, movie, time, quantity):
     file = filecheck()
     movie_data = create_list()
@@ -57,15 +59,9 @@ def purchase(date, movie, time, quantity):
     if daily + quantity > 20:
         return("Purchase denied, no tickets left today. ")
 
-
-    # bring in info from ledger (read from and append) √
-    # if you can purchase, execute that and add to ledger √
-    # if there is an error return it to the app but DO NOT add to ledger √
-
+# Check #1: Checking and limiting the showings per movie
 def check_showings(movie_data):
     showings = 0
-    # Should I create a loop that when done is true it blocks the user from buying more tickets?
-    # How should I do that?
     for i in range(len(movie_data)):
         if movie_data[i][1] == movie_data[i][1]:
             showings += int(movie_data[i][3])
@@ -73,7 +69,7 @@ def check_showings(movie_data):
         print("Limit reached, tickets for this showing are no longer available")
     return showings
 
-
+# Check #2: Checking and limiting the showings per day
 def check_per_day(movie_data, date):
     sum_daily = 0
     for i in range(len(movie_data)):
@@ -81,18 +77,7 @@ def check_per_day(movie_data, date):
             sum_daily += int(movie_data[i][3])
     return sum_daily
 
-        #if len(total_daily_list) == 20:
-            #print("You have reached your limit for ticket sales today, tickets today are no longer available")
-        #if len(total_daily_list) == 15:
-            #print("Only 5 more tickets are available to buy today.")
-    # make a dummy ledger
-
-def pull_data():
-    # read/pull in data from marc's file
-    # put it in a list (or multiple lists)
-    # scan those lists using other functions
-    pass
-
+# Program loop
 if __name__== "__main__":
     purchase("5/9", " Guardians of the Galaxy", " 8:00", 4)
-    # make the strings above variables that are brought in from charlie's data
+
