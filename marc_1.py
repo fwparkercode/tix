@@ -23,46 +23,39 @@ def get_date():
 
     for i in range(len(my_week_days)):
         date_list.append(my_week_days[i]+", "+ my_months[i] + " " + my_day[i])
-    print(date_list)
 
     url_list = [x['href'] for x in soup.findAll("a", {"class": "date-area"})]
-    print(url_list)
     return date_list, url_list
 
 
 
-
-
-
-
 # Movies
+def pull_movies(url):
 
+    page = urllib.request.urlopen(url)
+    soup = BeautifulSoup(page.read(), "html.parser")
 
+    my_movies = [x.text.strip() for x in soup.findAll("a", {"class": "showtimes-movie-title"})]
 
-
-if __name__ == "__main__":
-    get_date()
-
-
-
-
-
-#rows = my_table.findAll("tr")
-
-
-
-
-
+    return my_movies
 
 
 
 
 # Times
+def pull_times(url,movie_index):
+    page = urllib.request.urlopen(url)
+    soup = BeautifulSoup(page.read(), "html.parser")
+    my_times = []
+
+    my_times_initial = [[y.text.strip() for y in x.findAll("time", {"class": "timeInfo"})] for x in soup.findAll("div", {"class": "showtimes-times"})]
+    my_times.append(my_times_initial)
+
+    return my_times_initial[movie_index]
 
 
+if __name__ == "__main__":
+    get_date()
+    print(pull_movies("http://www.fandango.com/regalwebsterplace11_aaaxr/theaterpage?date=5/9/2017"))
+    print(pull_times("http://www.fandango.com/regalwebsterplace11_aaaxr/theaterpage?date=5/9/2017", 3))
 
-
-
-
-def pull_dates():
-    return []
