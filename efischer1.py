@@ -25,8 +25,8 @@ import os.path
 def filecheck():
     try:
         file = open("ledger.csv" , "r")
-    except IOError:
-        print("This file does not exist")
+    except:
+        print("This file does not exist. Creating new file now.")
         file = open("ledger.csv" , "w")
         file.close()
         file = open("ledger.csv" , "r")
@@ -46,24 +46,28 @@ def purchase(date, movie, time, quantity):
     file = filecheck()
     movie_data = create_list()
     print(movie_data)
-    showings = check_showings(movie_data)
+    showings = check_showings(movie_data, movie, time)
     daily = check_per_day(movie_data, date)
     file.close()
     file = open("ledger.csv" , "a")
     print(showings)
     if (showings + quantity) <= 10 and (daily + quantity) <=20:
         file.write(date +"," + movie +"," + time +"," + str(quantity) + "\n")
+        file.close()
         return("Confirmed!")
     if showings + quantity > 10:
+        file.close()
         return("Purchase denied, no tickets left in this showing")
     if daily + quantity > 20:
+        file.close()
         return("Purchase denied, no tickets left today. ")
 
+
 # Check #1: Checking and limiting the showings per movie
-def check_showings(movie_data):
+def check_showings(movie_data, movie, time):
     showings = 0
     for i in range(len(movie_data)):
-        if movie_data[i][1] == movie_data[i][1]:
+        if movie_data[i][1] == movie and movie_data[i][2] == time:
             showings += int(movie_data[i][3])
     if showings == 10:
         print("Limit reached, tickets for this showing are no longer available")
