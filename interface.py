@@ -157,16 +157,17 @@ class App():
 
         def purchase(self, label, date, movie, time, quantity):
             '''RUN ELIZA'S FUNCTION'''
-            response = efischer1.purchase(date[date.find(",") + 2:], movie, time, int(quantity))
-            if response == "Confirmed!":
-                label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
-            else:
-                label_text.set(response)
-            label.grid(row=7, column=1, columnspan=2)
-            self.date.set("-Select-")
-            self.movie.set("-Select-")
-            self.time.set("-Select-")
-            self.ticket_quant.set(0)
+            if date != "-Select-" and movie != '-Select-' and time != '-Select-' and quantity != 0:
+                response = efischer1.purchase(date[date.find(",") + 2:], movie, time, int(quantity))
+                if response == "Confirmed!":
+                    label_text.set("Thank you for your purchase!\n Receipt:\nDate: " + str(date) + "\nMovie: " + str(movie) + "\nTime: " + str(time) + "\nQuantity: " + str(quantity))
+                else:
+                    label_text.set(response)
+                label.grid(row=7, column=1, columnspan=2)
+                self.date.set("-Select-")
+                self.movie.set("-Select-")
+                self.time.set("-Select-")
+                self.ticket_quant.set(0)
 
 if __name__ == "__main__":
     root = Tk()
